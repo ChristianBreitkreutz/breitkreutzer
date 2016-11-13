@@ -30,5 +30,5 @@ I hope i don't need this for a while ;-)
 * ```PubkeyAuthentication yes```
 
 ### sshd reload and boot-settings of service
-* systemctl reload sshd
-* ja wie war das??
+* ```systemctl reload sshd```
+* ```systemctl enable sshd.service```
