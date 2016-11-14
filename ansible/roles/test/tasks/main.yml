@@ -1,0 +1,7 @@
+---
+
+- name: create test folder
+  file:
+    state: directory
+    path: "/home/doofdoof/test"
+    mode: 0755

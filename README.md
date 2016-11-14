@@ -32,3 +32,6 @@ I hope i don't need this for a while ;-)
 ### sshd reload and boot-settings of service
 * ```systemctl reload sshd```
 * ```systemctl enable sshd.service```
+
+# setup ansible (localy)
+with ansible 2.0 there should be a setting ```scp_if_ssh = True```
