@@ -4,6 +4,7 @@ I hope i don't need this for a while ;-)
 * create main user
 * add this user to wheel group in order to use sudo
 ```usermod -a -G wheel <username>```
+
 * create emergency user ( if i break login things with my main user )
 * block root login
 

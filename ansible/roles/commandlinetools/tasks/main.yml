@@ -1,0 +1,26 @@
+---
+
+- name: install curl
+  become: true
+  yum:
+    name: curl 
+
+- name: install vim
+  become: true
+  yum:
+    name: vim
+
+- name: install dos2unix
+  become: true
+  yum:
+    name: dos2unix
+
+- name: install tree
+  become: true
+  yum:
+    name: tree
+
+- name: install nano
+  become: true
+  yum:
+    name: nano
