@@ -3,6 +3,7 @@ I hope i don't need this for a while ;-)
 ## Create Users
 * create main user
 * add this user to wheel group in order to use sudo
+
 ```usermod -a -G wheel <username>```
 
 * create emergency user ( if i break login things with my main user )
@@ -39,7 +40,15 @@ I hope i don't need this for a while ;-)
 * ```systemctl enable sshd.service```
 
 # setup ansible (localy)
-with ansible 2.0 there should be a setting ```scp_if_ssh = True```
+I had Issues with the wellcome message "echo hello" in my .bashrc. and had to remove them.
+
+And with ansible 2.0 there should be a setting
+
+```scp_if_ssh = True```
+
+( On my ubuntu host i had to do this setting on centOS7 without o_O.)
+
+#temp
 ```ansible-playbook  -i local_inventory.ini inital.yml```
 fill in data
 
