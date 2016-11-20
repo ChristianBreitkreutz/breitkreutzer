@@ -1,0 +1,31 @@
+---
+
+- name: create local ansible setup folder in user home
+  file:
+    path: "{{ ansible_env['HOME'] }}/ansible"
+    state: directory
+    mode: 0755
+
+- name: try to load current localsetup.json
+  stat: path="{{ ansible_env['HOME'] }}/ansible/localsetup.json"
+  register: ansible_localsetup_json
+  changed_when: false #never report changed
+
+- name: create localsetup.json in your home folder
+  template:
+    src: localsetup.json.j2
+    dest: "{{ ansible_env['HOME'] }}/ansible/localsetup.json"
+    mode: 0644
+  when: not ansible_localsetup_json.stat.exists
+
+- name: try to load current local hosts
+  stat: path="{{ ansible_env['HOME'] }}/ansible/local_inventory.ini"
+  register: local_inventory_ini
+  changed_when: false #never report changed
+
+- name: create hosts in your home folder
+  template:
+    src: local_inventory.ini.j2
+    dest: "{{ ansible_env['HOME'] }}/ansible/local_inventory.ini"
+    mode: 0644
+  when: not local_inventory_ini.stat.exists

@@ -1,0 +1,7 @@
+---
+
+- hosts: webserver
+  pre_tasks:
+  
+  roles:
+    - localsetup

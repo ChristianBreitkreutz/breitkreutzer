@@ -1,6 +1,0 @@
----
-
-- hosts: stratoservers
-  remote_user: doofdoof
-  roles:
-    - test

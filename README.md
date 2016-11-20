@@ -4,8 +4,10 @@ I hope i don't need this for a while ;-)
 * create main user
 * create emergency user ( if i break login things with my main user )
 * block root login
- ```vim /etc/ssh/sshd_config```
- ```PermiitRootLogin no```
+
+```vim /etc/ssh/sshd_config```
+
+```PermitRootLogin no```
 
 # setup ssh
 
@@ -35,3 +37,7 @@ I hope i don't need this for a while ;-)
 
 # setup ansible (localy)
 with ansible 2.0 there should be a setting ```scp_if_ssh = True```
+```ansible-playbook  -i local_inventory.ini inital.yml```
+fill in data
+
+```ansible-playbook --extra-vars "@~/ansible/localsetup.json" -i ~/ansible/local_inventory.ini lamp.yml```
