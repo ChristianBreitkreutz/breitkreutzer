@@ -47,9 +47,13 @@ And with ansible 2.0 there should be a setting
 ```scp_if_ssh = True```
 
 ( On my ubuntu host i had to do this setting on centOS7 without o_O.)
+## Run initial setup playbook
 
-#temp
 ```ansible-playbook  -i local_inventory.ini inital.yml```
-fill in data
+
+This will create an 'ansible' folder in you user_home, with some files. Pls. fillin your data. 
+
+# Run main playbook
+
 
 ```ansible-playbook --extra-vars "@~/ansible/localsetup.json" -i ~/ansible/local_inventory.ini lamp.yml```
