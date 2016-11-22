@@ -53,7 +53,10 @@ And with ansible 2.0 there should be a setting
 
 This will create an 'ansible' folder in you user_home, with some files. Pls. fillin your data. 
 
-# Run main playbook
+# Run main playbooks
 
+## install and setup git, commandline tools and some bash stuff
+```ansible-playbook --extra-vars "@~/ansible/localsetup.json" -i ~/ansible/local_inventory.ini generalsetup.yml```
 
+## install and setup mysql, php and apache
 ```ansible-playbook --extra-vars "@~/ansible/localsetup.json" -i ~/ansible/local_inventory.ini lamp.yml```
