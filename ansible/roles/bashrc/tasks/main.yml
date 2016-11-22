@@ -1,0 +1,6 @@
+---
+
+- include: bashrc_setup.yml UserHome="{{ ansible_env['HOME'] }}"
+
+- include: bashrc_setup.yml UserHome="/root"
+  become: true

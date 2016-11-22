@@ -1,0 +1,25 @@
+---
+
+- name: Creates ~/.bashloader.d directory
+  file:
+    state: directory
+    path: "{{ UserHome }}/.bashloader.d"
+    mode: 0755
+
+- name: Puts the common in the bashloader.d
+  copy:
+    src: common.sh
+    dest: "{{ UserHome }}/.bashloader.d"
+    mode: 0644
+
+- name: load current .bashrc to var
+  shell: cat "{{ UserHome }}/.bashrc"
+  register: currentBashrc
+  changed_when: false
+
+- name: extend current .bashrc
+  template:
+    src: newBashrc.j2 
+    dest: "{{ UserHome }}/.bashrc"
+    mode: 0644
+  when: not currentBashrc.stdout | search("AnsibleCopyToken")

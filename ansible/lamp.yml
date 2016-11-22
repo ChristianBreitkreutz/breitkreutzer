@@ -4,3 +4,4 @@
   pre_tasks:
   roles:
     - commandlinetools
+    - bashrc
