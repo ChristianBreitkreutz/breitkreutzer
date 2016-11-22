@@ -2,25 +2,30 @@
 
 - name: install curl
   become: true
-  yum:
-    name: curl 
+  package:
+    name: curl
+    state: latest
 
 - name: install vim
   become: true
-  yum:
+  package:
     name: vim
+    state: latest
 
 - name: install dos2unix
   become: true
-  yum:
+  package:
     name: dos2unix
+    state: latest
 
 - name: install tree
   become: true
-  yum:
+  package:
     name: tree
+    state: latest
 
 - name: install nano
   become: true
-  yum:
+  package:
     name: nano
+    state: latest
