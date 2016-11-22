@@ -1,0 +1,6 @@
+---
+#https://www.howtoforge.com/apache_php_mysql_on_centos_7_lamp
+- hosts: webserver
+  roles:
+    - apache
+    # - php

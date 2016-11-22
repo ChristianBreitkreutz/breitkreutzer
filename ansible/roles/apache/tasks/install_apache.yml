@@ -1,0 +1,7 @@
+---
+
+- name: install apache
+  become: true
+  package:
+    name: httpd
+    state: present

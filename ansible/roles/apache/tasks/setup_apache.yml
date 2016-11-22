@@ -1,0 +1,28 @@
+---
+# with 2.2 it will be soo cool
+
+- name: systemctl start apache service
+  become: true
+  command: systemctl start httpd.service
+
+- name: systemctl add apache service to boot sequence
+  become: true
+  command: systemctl enable httpd.service
+
+- name: open port 80 (http)
+  become: true
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    jump: ACCEPT
+    destination_port: 80
+    ctstate: NEW
+
+- name: open port 443 (https)
+  become: true
+  iptables:
+    chain: INPUT
+    protocol: tcp
+    jump: ACCEPT
+    destination_port: 443
+    ctstate: NEW
