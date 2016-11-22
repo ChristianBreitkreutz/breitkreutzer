@@ -1,9 +1,19 @@
 ---
 # with 2.2 it will be soo cool
 
+- name: load current status of apache service
+  command: systemctl status httpd.service
+  register: httpd_status
+  changed_when: false
+
+- name: bla
+  debug:
+    msg: "{{httpd_status.stdout}}"
+
 - name: systemctl start apache service
   become: true
   command: systemctl start httpd.service
+  when: not "{{httpd_status.stdout}}"  | search("active (running)")
 
 - name: systemctl add apache service to boot sequence
   become: true
