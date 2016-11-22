@@ -1,0 +1,30 @@
+---
+
+- name: create ssh folder
+  file:
+    path: ~/.ssh
+    state: directory
+
+- stat: path=~/.ssh/github_ansible_generated
+  register: sshkey
+  changed_when: false
+
+- name: Creating pub SSH keys - skip if it's already exist
+  command: "ssh-keygen -N '' -t rsa -b 4096 -f ~/.ssh/github_ansible_generated"
+  when: not sshkey.stat.exists
+
+- name: copy public key
+  command: "cat ~/.ssh/github_ansible_generated.pub"
+  register: publickey
+  changed_when: false
+
+- name: add public key to github account
+  uri:
+    url: https://api.github.com/user/keys
+    method: POST
+    user: "{{git_github_user}}"
+    password: "{{git_github_pass}}"
+    body: "{\"title\":\"ansible_generated_{{ansible_user_id}}@{{ansible_hostname}}\",\"key\":\"{{publickey.stdout}}\"}" 
+    force_basic_auth: yes
+    body_format: json
+    status_code: 201, 422 #201 - set key, 422 - key is already in use
