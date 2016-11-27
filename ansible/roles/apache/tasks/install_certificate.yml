@@ -1,0 +1,32 @@
+---
+
+- name: debug help
+  debug:
+    msg: "If you have any issues with the installer\n try: sudo vi /etc/yum/pluginconf.d/fastestmirror.conf and set enable = 0 "
+
+- name: install epel
+  become: true
+  package:
+    name: epel-release
+    state: latest
+
+- name: install cert bot for apache
+  become: true
+  package:
+    name: python-certbot-apache
+    state: latest
+
+- name: systemctl stop apache service in order to install cert
+  become: true
+  command: systemctl stop httpd.service
+
+- name: use certbot to install cert
+  become: true
+  command: certbot --apache --rsa-key-size 4096 --domain {{ ansible_fqdn }} --email {{certificate_email}} --agree-tos --non-interactive
+# it seems letsencrypt looks in /etc/apache2/sites-available and not /etc/apache2/sites-enabled.
+#certbot renew --quiet as systemd cron
+
+- name: systemctl start apache service again
+  become: true
+  command: systemctl start httpd.service
+
