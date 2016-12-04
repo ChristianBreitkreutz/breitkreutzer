@@ -56,4 +56,4 @@ This will create an 'ansible' folder in you user_home, with some files. Pls. fil
 ```ansible-playbook --extra-vars "@~/ansible/localsetup.json" -i ~/ansible/local_inventory.ini generalsetup.yml```
 
 ## install and setup mysql, php and apache
-```ansible-playbook --extra-vars "@~/ansible/localsetup.json" -i ~/ansible/local_inventory.ini lamp.yml```
+```ansible-playbook -i ~/ansible/local_inventory.ini lamp.yml```
