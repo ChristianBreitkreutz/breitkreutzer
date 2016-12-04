@@ -1,0 +1,18 @@
+---
+
+- name: install php
+  become: true
+  package:
+    name: php
+    state: present
+
+- name: create info.php
+  template:
+    force: no
+    src: info.php.j2 
+    dest: /var/www/html/info.php
+    mode: 0644
+
+- name: systemctl restart apache service
+  become: true
+  command: systemctl restart httpd.service

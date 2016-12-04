@@ -4,4 +4,4 @@
   become_method: su
   roles:
     - apache
-    # - php
+    - php
