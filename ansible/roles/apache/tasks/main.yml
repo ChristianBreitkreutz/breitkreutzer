@@ -4,4 +4,4 @@
 - include: setup_apache.yml
 - include: install_certificate.yml
 - include: start_httpd.yml
-# - include: setup_webroot.yml
+- include: setup_webroot.yml

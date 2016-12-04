@@ -1,3 +1,18 @@
 ---
-#set user rights in /var/www/html/.
-#add example index
+
+- name: set user rights for /var/www/html/
+  become: true
+  file:
+    path: /var/www/html
+    state: directory
+    owner: "{{ansible_user_id}}"
+    group: "{{ansible_user_id}}"
+    mode: 0755
+
+- name: create index.html
+  template:
+    force: no
+    src: index.html.j2 
+    dest: /var/www/html/index.html
+    mode: 0644
+

@@ -25,8 +25,8 @@
 
 - name: create key and crt
   become: true
-  command: openssl req -x509 -newkey rsa:2048 -nodes  -subj "/C=DE/ST=Hamburg/L=Hamburg/O=privat/CN=${ansible_fqdn}" -days 365 -keyout /etc/httpd/ssl/apache.key -out /etc/httpd/ssl/apache.crt
-  when: apache_key_file is not defined and apache_ctr_file is not defined
+  command: openssl req -x509 -newkey rsa:2048 -nodes  -subj "/C=DE/ST=Hamburg/L=Hamburg/O=privat/CN={{ansible_fqdn}}" -days 365 -keyout /etc/httpd/ssl/apache.key -out /etc/httpd/ssl/apache.crt
+  when: not apache_key_file.stat.exists and not apache_ctr_file.stat.exists
 
 - name: set hostname in ssl.conf
   become: true
