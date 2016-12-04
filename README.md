@@ -1,12 +1,9 @@
 # First steps on a fresh server
 I hope i don't need this for a while ;-)
 ## Create Users
-* create main user
-* add this user to wheel group in order to use sudo
-
-```usermod -a -G wheel <username>```
-
-* create emergency user ( if i break login things with my main user )
+* change root pass ```passwd```
+* create main user ```useradd```
+* create backup user ( if i break login things with my main user )
 * block root login
 
 ```vim /etc/ssh/sshd_config```
@@ -28,7 +25,7 @@ I hope i don't need this for a while ;-)
 * paste pub-key
 * ```chmod 644 .ssh/authorized_keys```
 
-## on server ( as root )
+## on server ( as su )
 
 ### adapt sshd config
 * ```vim /etc/ssh/sshd_config```

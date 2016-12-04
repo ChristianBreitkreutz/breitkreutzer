@@ -1,6 +1,7 @@
 ---
 #https://www.howtoforge.com/apache_php_mysql_on_centos_7_lamp
 - hosts: webserver
+  become_method: su
   roles:
     - apache
     # - php

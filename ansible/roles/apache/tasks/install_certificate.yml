@@ -1,32 +1,50 @@
 ---
 
-- name: debug help
-  debug:
-    msg: "If you have any issues with the installer\n try: sudo vi /etc/yum/pluginconf.d/fastestmirror.conf and set enable = 0 "
-
-- name: install epel
+- name: install apache ssl modul
   become: true
   package:
-    name: epel-release
-    state: latest
+    name: mod_ssl
+    state: present
 
-- name: install cert bot for apache
+- name: Creates /etc/httpd/ssl directory
   become: true
-  package:
-    name: python-certbot-apache
-    state: latest
+  file:
+    state: directory
+    path: /etc/httpd/ssl
+    mode: 0755
 
-- name: systemctl stop apache service in order to install cert
+- name: check status of apache.key
+  stat:
+    path: /etc/httpd/ssl/apache.key
+  register: apache_key_file
+
+- name: check status of apache.ctr
+  stat:
+    path: /etc/httpd/ssl/apache.crt
+  register: apache_ctr_file
+
+- name: create key and crt
   become: true
-  command: systemctl stop httpd.service
+  command: openssl req -x509 -newkey rsa:2048 -nodes  -subj "/C=DE/ST=Hamburg/L=Hamburg/O=privat/CN=${ansible_fqdn}" -days 365 -keyout /etc/httpd/ssl/apache.key -out /etc/httpd/ssl/apache.crt
+  when: apache_key_file is not defined and apache_ctr_file is not defined
 
-- name: use certbot to install cert
+- name: set hostname in ssl.conf
   become: true
-  command: certbot --apache --rsa-key-size 4096 --domain {{ ansible_fqdn }} --email {{certificate_email}} --agree-tos --non-interactive
-# it seems letsencrypt looks in /etc/apache2/sites-available and not /etc/apache2/sites-enabled.
-#certbot renew --quiet as systemd cron
+  lineinfile:
+    dest: /etc/httpd/conf.d/ssl.conf
+    regexp: '[#]?ServerName '
+    line: "ServerName {{ansible_fqdn}}:443"
 
-- name: systemctl start apache service again
+- name: set SSLCertificateFile in ssl.conf
   become: true
-  command: systemctl start httpd.service
+  lineinfile:
+    dest: /etc/httpd/conf.d/ssl.conf
+    regexp: 'SSLCertificateFile '
+    line: "SSLCertificateFile /etc/httpd/ssl/apache.crt"
 
+- name: set SSLCertificateKeyFile in ssl.conf
+  become: true
+  lineinfile:
+    dest: /etc/httpd/conf.d/ssl.conf
+    regexp: 'SSLCertificateKeyFile '
+    line: "SSLCertificateKeyFile /etc/httpd/ssl/apache.key"
