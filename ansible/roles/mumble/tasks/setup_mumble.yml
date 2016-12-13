@@ -1,0 +1,59 @@
+---
+
+- name: set log file logfile
+  become: true
+  lineinfile:
+    dest: /etc/murmur.ini
+    regexp: '[;]?logfile='
+    line: logfile="/var/log/murmur/murmur.log"
+
+- name: set log file pidfile
+  become: true
+  lineinfile:
+    dest: /etc/murmur.ini
+    regexp: '[;]?pidfile='
+    line: pidfile="/var/run/murmur/murmur.pid"
+
+- name: set mumble root password
+  become: true
+  lineinfile:
+    dest: /etc/murmur.ini
+    regexp: '[;]?serverpassword='
+    line: "serverpassword={{mumble_root_pass}}"
+
+- name: set mumble bandwidth
+  become: true
+  lineinfile:
+    dest: /etc/murmur.ini
+    regexp: '[;]?bandwidth='
+    line: "bandwidth=510000" #kbit/s
+
+- name: set log file max userers
+  become: true
+  lineinfile:
+    dest: /etc/murmur.ini
+    regexp: 'users='
+    line: users=5
+
+- name: set log file port
+  become: true
+  lineinfile:
+    dest: /etc/murmur.ini
+    regexp: 'port='
+    line: "port=64738" #standard
+
+- name: open port 64738 (mumble)
+  become: true
+  iptables:
+    chain: INPUT
+    protocol: all
+    jump: ACCEPT
+    ctstate: NEW
+
+- name: create murmur.service
+  become: true
+  template:
+    force: no
+    src: murmur.service.j2
+    dest: "/etc/systemd/system/murmur.service"
+    mode: 0644

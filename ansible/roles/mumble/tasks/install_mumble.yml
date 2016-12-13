@@ -1,0 +1,86 @@
+---
+- name: add murmur group
+  become: true
+  group:
+    name: murmur
+    state: present
+
+- name: add murmur group to ansible user
+  become: true
+  user:
+    name: "{{ansible_user_id}}"
+    group: murmur
+
+- name: add murmur user
+  become: true
+  user:
+    name: murmur
+    system: yes
+    createhome: yes
+    home: /var/lib/murmur
+    shell: /sbin/nologin
+    group: murmur
+
+- name: create murmur log folder
+  become: true
+  file:
+    group: murmur
+    owner: murmur
+    mode: 0770
+    path: /var/log/murmur
+    state: directory
+
+
+
+# unachive doesnt work with tar.gz- workaround ####################################
+
+- name: check status of murmur.ini file ( if this is there no action is needed)
+  stat:
+    path: /usr/local/murmur/murmur.ini
+  register: murmur_ini
+
+- name: create murmur /tmp/unachive folder
+  file:
+    path: /tmp/unachive
+    state: directory
+    mode: 0777
+  when: not murmur_ini.stat.exists
+
+- name: download mumble
+  get_url:
+    url: "https://mumble.info/snapshot/murmur-static_x86-1.3.0~1797~g6ac0553~snapshot.tar.bz2"
+    dest: /tmp/unachive/murmur.tar.bz2
+  when: not murmur_ini.stat.exists
+
+- name: Extract mumble archive
+  command: tar -xf murmur.tar.bz2
+  args:
+    chdir: /tmp/unachive
+  when: not murmur_ini.stat.exists
+
+- name: Copy untar folder
+  become: true
+  command: mv /tmp/unachive/murmur-static_x86-1.3.0~1797~g6ac0553~snapshot /usr/local/murmur
+  when: not murmur_ini.stat.exists
+
+########################################################################
+- name: change user rightd murmur usr/local folder
+  become: true
+  file:
+    group: murmur
+    owner: murmur
+    path: /usr/local/murmur
+    recurse: yes
+    state: directory
+    mode: 0770
+
+- name: Copy murmur.ini
+  become: true
+  copy:
+    remote_src: True
+    src: /usr/local/murmur/murmur.ini
+    dest: /etc/murmur.ini
+    force: no
+
+
+

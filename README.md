@@ -57,3 +57,6 @@ This will create an 'ansible' folder in you user_home, with some files. Pls. fil
 
 ## install and setup mysql, php and apache
 ```ansible-playbook -i ~/ansible/local_inventory.ini lamp.yml```
+
+## install mumble
+```ansible-playbook --extra-vars "@~/ansible/mumble.json" -i ~/ansible/local_inventory.ini mumble.yml```

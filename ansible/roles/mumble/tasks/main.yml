@@ -1,0 +1,4 @@
+---
+
+- include: install_mumble.yml
+- include: setup_mumble.yml

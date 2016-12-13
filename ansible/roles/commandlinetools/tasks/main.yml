@@ -29,3 +29,9 @@
   package:
     name: nano
     state: latest
+
+- name: install unzip
+  become: true
+  package:
+    name: unzip
+    state: latest
