@@ -31,7 +31,6 @@
     state: directory
 
 
-
 # unachive doesnt work with tar.gz- workaround ####################################
 
 - name: check status of murmur.ini file ( if this is there no action is needed)
