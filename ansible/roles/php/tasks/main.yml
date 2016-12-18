@@ -23,6 +23,8 @@
     dest: /var/www/html/info.php
     mode: 0644
 
-- name: systemctl restart apache service
+- name: restart apache
   become: true
-  command: systemctl restart httpd.service
+  service:
+    name: "{{ apache_service }}"
+    state:  reloaded

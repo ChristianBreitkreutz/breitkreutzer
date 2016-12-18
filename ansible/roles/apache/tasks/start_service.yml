@@ -1,0 +1,8 @@
+---
+
+- name: add apache to boot sequence and start service
+  become: true
+  service:
+    name: "{{ apache_service }}"
+    enabled: yes
+    state: started

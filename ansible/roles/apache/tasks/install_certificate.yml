@@ -1,10 +1,21 @@
 ---
+- name: install openssl
+  become: true
+  package:
+    name: openssl
+    state: present
 
-- name: install apache ssl modul
+- name: install apache ssl modul (RedHat only)
   become: true
   package:
     name: mod_ssl
     state: present
+  when: ansible_os_family == 'RedHat'
+
+- name: activate apache modul (Debian only)
+  become: true
+  command: a2enmod ssl
+  when: ansible_os_family == 'Debian'
 
 - name: Creates /etc/httpd/ssl directory
   become: true

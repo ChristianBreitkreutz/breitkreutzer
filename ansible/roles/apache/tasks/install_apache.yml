@@ -3,5 +3,5 @@
 - name: install apache
   become: true
   package:
-    name: httpd
+    name: "{{ apache_package }}"
     state: present
