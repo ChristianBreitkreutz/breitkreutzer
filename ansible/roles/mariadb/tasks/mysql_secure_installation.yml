@@ -1,0 +1,9 @@
+---
+# Set root password
+# UPDATE mysql.user SET Password=PASSWORD('mysecret') WHERE User='root';
+# FLUSH PRIVILEGES;
+- name: wurst
+  mysql_user:
+    name: root
+    password: ""
+    check_implicit_admin: true

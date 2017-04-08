@@ -1,0 +1,21 @@
+---
+- include: installmariadb.yml
+
+- name: Add configuration
+  become: true
+  template:
+    src: mysql-clients.cnf.j2
+    dest: /etc/my.cnf.d/mysql-clients.cnf
+    owner: root 
+    group: root 
+    mode: 0644
+  notify: restart mysql
+
+- name: Start and enable service
+  become: true
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+
+- include: mysql_secure_installation.yml

@@ -3,6 +3,6 @@
 - hosts: webserver
   become_method: su
   roles:
-    - apache
-    - php
- #   - mysql
+  #  - apache
+  #  - php
+    - mariadb

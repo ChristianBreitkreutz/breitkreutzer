@@ -1,0 +1,19 @@
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  config.vm.box = "centos/7"
+  config.ssh.insert_key = true
+  config.vm.provider :virtualbox do |vb|
+    vb.check_guest_additions = false
+    vb.functional_vboxsf     = false
+    vb.gui = false
+  end
+  config.vm.provision 'ansible' do |ansible|
+    ansible.inventory_path = "~/ansible/local_inventory.ini"
+    ansible.verbose           = true
+    ansible.host_key_checking = false
+    ansible.extra_vars = "@~/ansible/localsetup.json"
+    ansible.playbook = "../ansible/generalsetup.yml"
+  end
+
+end

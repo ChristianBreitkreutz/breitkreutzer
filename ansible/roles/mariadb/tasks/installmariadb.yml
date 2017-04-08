@@ -1,0 +1,28 @@
+---
+
+- name: Add maria db repository
+  become: true
+  yum_repository:
+    name: MariaDB
+    description: mariadb repo {{ mariadb_version }}/centos{{ ansible_distribution_major_version|int }}-amd64
+    baseurl: http://yum.mariadb.org/{{ mariadb_version }}/centos{{ ansible_distribution_major_version|int }}-amd64
+    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    gpgcheck: yes
+
+- name: Install MariaDB server
+  become: true
+  package:
+    name: MariaDB-server
+    state: present
+
+- name: Install MariaDB client
+  become: true
+  package:
+    name: MariaDB-client
+    state: present
+
+- name: Install MySQLdb Python package for secure installations.
+  become: true
+  yum:
+    name: MySQL-python
+    state: present

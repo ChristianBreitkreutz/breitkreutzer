@@ -27,3 +27,10 @@
     mode: 0644
     force: no
 
+- name: create mumble.json
+  template:
+    src: lamp.json.j2
+    dest: "{{ ansible_env['HOME'] }}/ansible/lamp.json"
+    mode: 0644
+    force: no
+
