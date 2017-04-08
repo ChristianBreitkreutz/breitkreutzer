@@ -1,9 +1,8 @@
 # First steps on a fresh server
 I hope i don't need this for a while ;-)
+```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ~/ansible/local_inventory.ini --extra-vars "@~/ansible/localsetup.json" prepareServer.yml --ask-pass -u root```
 ## Create Users
-* change root pass ```passwd```
-* create main user ```useradd```
-* create backup user ( if i break login things with my main user )
+
 * block root login
 
 ```vim /etc/ssh/sshd_config```

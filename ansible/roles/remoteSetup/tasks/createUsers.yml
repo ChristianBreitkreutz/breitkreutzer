@@ -1,0 +1,14 @@
+---
+
+- name: "create {{deploy_user}} user, pass is in ~/ansible/{{deploy_user}}_pass.txt"
+  become: true
+  user:
+    name: "{{deploy_user}}"
+    password: "{{ lookup('password', '~/ansible/{{deploy_user}}_pass.txt length=125 chars=ascii_letters,digits,hexdigits') | password_hash('sha512')}}"
+
+- name: "change root user, pass is in ~/ansible/root_pass.txt"
+  become: true
+  user:
+    name: root
+    password: "{{ lookup('password', '~/ansible/root_pass.txt length=125 chars=ascii_letters,digits,hexdigits') | password_hash('sha512')}}"
+

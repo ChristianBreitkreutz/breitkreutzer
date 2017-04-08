@@ -1,0 +1,23 @@
+---
+
+- name: create ssh folder
+  file:
+    path: ~/.ssh
+    state: directory
+  delegate_to: 127.0.0.1
+
+- stat: "path=~/.ssh/{{ ansible_hostname }}_key"
+  register: sshkey
+  changed_when: false
+  delegate_to: 127.0.0.1
+
+- name: Creating pub SSH keys - skip if it's already exist
+  command: "ssh-keygen -N '' -t rsa -b 4096 -f ~/.ssh/{{ ansible_hostname }}_key"
+  when: not sshkey.stat.exists
+  delegate_to: 127.0.0.1
+
+- name: copy new ssh key to server
+  authorized_key:
+    user: "{{deploy_user}}"
+    state: present
+    key: "{{ lookup('file', '~/.ssh/{{ ansible_hostname }}_key.pub') }}"
