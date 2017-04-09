@@ -1,0 +1,31 @@
+---
+
+- name: deactivate password authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '[#]?PasswordAuthentication'
+    line: 'PasswordAuthentication no'
+
+- name: activate RSA authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '[#]?RSAAuthentication'
+    line: 'RSAAuthentication yes'
+
+- name: activate Pubkey authentication
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '[#]?PubkeyAuthentication'
+    line: 'PubkeyAuthentication yes'
+
+- name: deactivate root login
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    regexp: '[#]?PermitRootLogin'
+    line: 'PermitRootLogin no'
+
+- name: restart and enable sshdh service 
+  service:
+    name: sshd.service
+    enabled: yes
+    state: reloaded

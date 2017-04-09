@@ -1,7 +1,0 @@
----
-
-/etc/ssh/sshd_config
-"Match User root,{{deploy_user}}"
-    PasswordAuthentication no
-Match {{emergency_user}}
-    PasswordAuthentication yes

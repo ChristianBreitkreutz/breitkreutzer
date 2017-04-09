@@ -1,39 +1,4 @@
 # First steps on a fresh server
-I hope i don't need this for a while ;-)
-```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ~/ansible/local_inventory.ini --extra-vars "@~/ansible/localsetup.json" prepareServer.yml --ask-pass -u root```
-## Create Users
-
-* block root login
-
-```vim /etc/ssh/sshd_config```
-
-```PermitRootLogin no```
-
-# setup ssh
-
-## localy 
-* create localy a key
-```ssh-keygen -t rsa -b 4096 -C "mail@lala.com"```
-* copy public key
-
-## on server(as main user):
-* go to home folder
-* ```mkdir .ssh```
-* ```chmod 700 .ssh```
-* ```vi .ssh/authorized_keys```
-* paste pub-key
-* ```chmod 644 .ssh/authorized_keys```
-
-## on server ( as su )
-
-### adapt sshd config
-* ```vim /etc/ssh/sshd_config```
-* ```RSAAuthentication yes```
-* ```PubkeyAuthentication yes```
-
-### sshd reload and boot-settings of service
-* ```systemctl reload sshd```
-* ```systemctl enable sshd.service```
 
 # setup ansible (localy)
 I had Issues with the wellcome message "echo hello" in my .bashrc. and had to remove them.
@@ -43,11 +8,14 @@ And with ansible 2.0 there should be a setting
 ```scp_if_ssh = True```
 
 ( On my ubuntu host i had to do this setting on centOS7 without o_O.)
-## Run initial setup playbook
+# Run initial setup playbook
 
 ```ansible-playbook  -i local_inventory.ini inital.yml```
 
 This will create an 'ansible' folder in you user_home, with some files. Pls. fillin your data. 
+
+# prepare server ( fresh reinstalled )
+```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ~/ansible/local_inventory.ini --extra-vars "@~/ansible/localsetup.json" prepareServer.yml --ask-pass -u root```
 
 # Run main playbooks
 
