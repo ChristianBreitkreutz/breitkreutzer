@@ -12,7 +12,7 @@ And with ansible 2.0 there should be a setting
 
 ```ansible-playbook  -i local_inventory.ini inital.yml```
 
-This will create an 'ansible' folder in you user_home, with some files. Pls. fillin your data. 
+This will create an 'ansible' folder in you user_home, with some files. Pls. fill in your data. 
 
 # prepare server ( fresh reinstalled )
 ```export ANSIBLE_HOST_KEY_CHECKING=False && ansible-playbook -i ~/ansible/local_inventory.ini --extra-vars "@~/ansible/localsetup.json" prepareServer.yml --ask-pass -u root```
