@@ -16,3 +16,12 @@
     dest: /var/www/html/index.html
     mode: 0644
 
+- name: add html root folder into home folder
+  file:
+    src: /var/www/html
+    dest: ~/html
+    state: directory
+    owner: "{{ansible_user_id}}"
+    group: "{{ansible_user_id}}"
+    state: link
+
