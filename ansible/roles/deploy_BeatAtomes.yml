@@ -1,0 +1,6 @@
+- hosts: webserver
+  become_method: su
+  vars:
+    ansible_become_pass: "{{ lookup('password', '~/ansible/root_pass.txt length=125 chars=ascii_letters,digits,hexdigits')}}"
+  roles:
+    - beatatomes

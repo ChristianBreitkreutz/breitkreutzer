@@ -1,0 +1,10 @@
+# local:
+# checkout beat atomes
+
+# server:
+# dependency for php check, extra libaries?
+# install lilypond 
+# cerate projectfolder on server
+# push ly files on server
+# render files
+# build html/php to allow file access ( direct image slideshow view as png?)
