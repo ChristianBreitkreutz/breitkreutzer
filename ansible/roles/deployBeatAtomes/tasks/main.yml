@@ -1,0 +1,34 @@
+---
+#- name: download lilypond
+#  become: true
+#  get_url:
+#      url: "http://download.linuxaudio.org/lilypond/binaries/linux-64/lilypond-2.18.2-1.linux-64.sh"
+#      dest: ~/
+#      mode: 0664
+
+#- name: lilypond version check
+#  shell : lilypond --version
+#  register: lilypondVersion
+
+
+#- name: install lilypond
+#  become: true
+#  command: sh ~/lilypond-2.18.2-1.linux-64.sh --batch
+
+- name: checkout beat atomes
+  git:
+    repo: https://github.com/ChristianBreitkreutz/Beat-Atomes.git
+    dest: /var/www/html/beat-atomes
+    force: yes
+
+- name: build beat atomes
+  shell: lilypond -fpng -fpdf *.ly
+  args:
+    chdir: /var/www/html/beat-atomes/
+
+- name: create temporay index.php
+  template:
+    force: yes
+    src: index.php.j2 
+    dest: /var/www/html/beat-atomes/index.php
+    mode: 0644
