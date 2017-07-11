@@ -20,5 +20,6 @@
         group: "{{ansible_user_id}}"
         mode: 0755
   roles:
+    - deployBiquadFilter
     - deployBeatAtomes
     - homepage
