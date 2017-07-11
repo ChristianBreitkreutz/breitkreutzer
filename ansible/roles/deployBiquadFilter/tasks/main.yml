@@ -1,0 +1,7 @@
+---
+- name: checkout biquad filter
+  git:
+    repo: https://github.com/ChristianBreitkreutz/BiquadFilter.git
+    dest: /var/www/html/projects/biquad-filter
+    force: yes
+  when: "{{force_build}}"
