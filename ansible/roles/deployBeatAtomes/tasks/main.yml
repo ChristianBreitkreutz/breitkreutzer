@@ -1,19 +1,27 @@
 ---
-#- name: download lilypond
-#  become: true
-#  get_url:
-#      url: "http://download.linuxaudio.org/lilypond/binaries/linux-64/lilypond-2.18.2-1.linux-64.sh"
-#      dest: ~/
-#      mode: 0664
+- name: stat download script
+  become: true
+  stat:
+    path: "~/lilypond-2.18.2-1.linux-64.sh"
+  register: lilypondInstaller
+  
+- name: download lilypond
+  become: true
+  get_url:
+      url: "http://download.linuxaudio.org/lilypond/binaries/linux-64/lilypond-2.18.2-1.linux-64.sh"
+      dest: ~/
+      mode: 0664
+  when: not lilypondInstaller.stat.exists
 
-#- name: lilypond version check
-#  shell : lilypond --version
-#  register: lilypondVersion
+- name: lilypond version check
+  shell : lilypond --version
+  register: lilypondVersion
+  changed_when: false
 
-
-#- name: install lilypond
-#  become: true
-#  command: sh ~/lilypond-2.18.2-1.linux-64.sh --batch
+- name: install lilypond
+  become: true
+  command: sh ~/lilypond-2.18.2-1.linux-64.sh --batch
+  when: not lilypondVersion.stdout | search("GNU LilyPond 2.18.2")
 
 - name: checkout beat atomes
   git:
