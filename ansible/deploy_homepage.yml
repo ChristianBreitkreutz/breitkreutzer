@@ -1,0 +1,24 @@
+---
+- hosts: webserver
+  become_method: su
+  vars:
+    ansible_become_pass: "{{ lookup('password', '~/ansible/root_pass.txt length=125 chars=ascii_letters,digits,hexdigits')}}"
+
+  vars_prompt:
+    - name: "force_build"
+      prompt: "force builds(true/false)? default:"
+      default: false
+      private: no
+
+  pre_tasks:
+    - name: set user rights for /var/www/html/projects
+      become: true
+      file:
+        path: /var/www/html/projects
+        state: directory
+        owner: "{{ansible_user_id}}"
+        group: "{{ansible_user_id}}"
+        mode: 0755
+  roles:
+    - deployBeatAtomes
+    - homepage

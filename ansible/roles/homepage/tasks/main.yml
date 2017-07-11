@@ -1,0 +1,18 @@
+---
+
+- name: copy projects
+  copy:
+    src: "../../../www/{{ item }}"
+    dest: /var/www/html/projects
+    owner: "{{ansible_user_id}}"
+    mode: 0755
+  with_items:
+     - beat-atomes
+
+- name: copy main homepage
+  copy:
+    src: ../../../www/html
+    dest: /var/www
+    owner: "{{ansible_user_id}}"
+    mode: 0755
+ 
