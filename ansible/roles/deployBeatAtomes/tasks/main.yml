@@ -26,17 +26,12 @@
 - name: checkout beat atomes
   git:
     repo: https://github.com/ChristianBreitkreutz/Beat-Atomes.git
-    dest: /var/www/html/beat-atomes
+    dest: /var/www/html/projects/beat-atomes
     force: yes
+  when: "{{force_build}}"
 
 - name: build beat atomes
   shell: lilypond -fpng -fpdf *.ly
   args:
-    chdir: /var/www/html/beat-atomes/
-
-- name: create temporay index.php
-  template:
-    force: yes
-    src: index.php.j2 
-    dest: /var/www/html/beat-atomes/index.php
-    mode: 0644
+    chdir: /var/www/html/projects/beat-atomes/
+  when: "{{force_build}}"
