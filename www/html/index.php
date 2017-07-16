@@ -1,34 +1,38 @@
-<html>
+html>
 <head>
 <style>
 
-a.outerBox {
-  padding: inherit;
-  padding-left: 200px;
-  padding-right: 1000px;
-  background-color: #dedede;
+body {
+  background-color: #345345;
+}
 
+
+.linkbar {
+  height: 140px;
+  width: 99%;
+  background:#ff00ff;
+  margin-top: 10;
+  margin-right: 0;
+  display: table;
+  position: relative;
 }
-div.outerBox {
-  padding: 40px;
-  margin: 12px;
-}
+
 </style>
 </head>
-<body>
+<body marginwidth="0" marginheight:"0" >
   <h1>breitkreutzer</h1>
   <hr>
 <?php
 if ($handle = opendir ( 'projects' )) {
-	while ( false !== ($file = readdir ( $handle )) ) {
-		if ($file != "." && $file != "..") {
-			echo '<div class=outerBox ><a class=outerBox href="projects/' . $file . '"><span class = "linkbar">' . $file . '</span></a></div>';
-		}
-	}
-	closedir ( $handle );
-}
+        while ( false !== ($file = readdir ( $handle )) ) {
+                if ($file != "." && $file != "..") {
+                        echo '<a href="projects/' . $file . '" class="linkbar" ><span>' . $file . 'alksdflaksdljf  <img src="http://www.marions-kochbuch.de/index-bilder/knoblauch-fleisch-wurst.jpg" width=100 /></span></a>';
+                }
+        }
+        closedir ( $handle );
+}     
 
 ?>
-
+     
 </body>
-</html>
+</html>i  

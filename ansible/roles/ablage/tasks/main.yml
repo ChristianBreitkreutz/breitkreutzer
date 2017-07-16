@@ -1,0 +1,13 @@
+---
+- name: create ablage dir
+  file:
+    path: /var/www/html/ablage
+    state: directory
+    mode: 0777
+
+- name: add ablage organizer
+  template:
+    force: no
+    src: index.php.j2 
+    dest: /var/www/html/ablage/index.php
+    mode: 0644

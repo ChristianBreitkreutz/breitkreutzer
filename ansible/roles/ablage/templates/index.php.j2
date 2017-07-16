@@ -1,0 +1,43 @@
+<body>
+<h1>Ablage</h1>
+<?php
+date_default_timezone_set('UTC');
+$files = getFiles();
+
+foreach ($files as &$file) {
+  deleteOldFile($file);
+}
+
+if ($handle = opendir ( '.' )) {
+    while ( false !== ($file = readdir ( $handle )) ) {
+        if ($file != "." && $file != ".." && $file != "index.php") {
+            echo '<li><a href="' . $file . '" >' . $file . ' -> created' . date("d. M. Y h:m:s",filemtime($file)). '</a></li>';
+        }
+    }
+    closedir ( $handle );
+}
+
+
+function getFiles(){
+$files = array();
+  if ($handle = opendir ( '.' )) {
+    while ( false !== ($file = readdir ( $handle )) ) {
+          if ($file != "." && $file != ".." && $file != "index.php") {
+      array_push($files, getcwd() ."/". $file);
+          }
+      }
+      closedir ( $handle );
+  }
+return $files;
+}
+
+function deleteOldFile($filename){
+  if (file_exists($filename)) {
+    if(filemtime($filename) < strtotime('-30 days')) {
+      echo "I will delete: ". $filename ."<br/>";
+      unlink($filename);
+    }
+  }
+}
+?>
+</body>
