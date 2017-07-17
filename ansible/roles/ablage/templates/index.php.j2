@@ -1,3 +1,15 @@
+<html>
+<head>
+<style>
+h1 {font-size:40px;}
+p {
+  font-size:25px;
+  font-family: sans-serif
+}
+.tiny{font-size:15px;}
+a{text-decoration:none;}
+</style>
+</head>
 <body>
 <h1>Ablage</h1>
 <?php
@@ -11,7 +23,7 @@ foreach ($files as &$file) {
 if ($handle = opendir ( '.' )) {
     while ( false !== ($file = readdir ( $handle )) ) {
         if ($file != "." && $file != ".." && $file != "index.php") {
-            echo '<li><a href="' . $file . '" >' . $file . ' -> created' . date("d. M. Y h:m:s",filemtime($file)). '</a></li>';
+            echo '<p><a href="' . $file . '" >' . $file . ' <span class="tiny">created: ' . date("d. M. h:m",filemtime($file)).', '.date("d",filemtime($file) - strtotime('-29 days')). ' Day(s) left</span></a></p>';
         }
     }
     closedir ( $handle );
@@ -33,7 +45,7 @@ return $files;
 
 function deleteOldFile($filename){
   if (file_exists($filename)) {
-    if(filemtime($filename) < strtotime('-30 days')) {
+    if(filemtime($filename) < strtotime('-29 days')) {
       echo "I will delete: ". $filename ."<br/>";
       unlink($filename);
     }
@@ -41,3 +53,4 @@ function deleteOldFile($filename){
 }
 ?>
 </body>
+</html>
