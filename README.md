@@ -35,3 +35,6 @@ This will:
 
 ## install mumble
 ```ansible-playbook --extra-vars "@~/ansible/mumble.json" -i ~/ansible/local_inventory.ini mumble.yml```
+
+## deploy homepage
+```ansible-playbook -i ~/ansible/local_inventory.ini deploy_homepage.yml```
