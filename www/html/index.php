@@ -1,38 +1,34 @@
-html>
+<html>
 <head>
-<style>
-
-body {
-  background-color: #345345;
-}
-
-
-.linkbar {
-  height: 140px;
-  width: 99%;
-  background:#ff00ff;
-  margin-top: 10;
-  margin-right: 0;
-  display: table;
-  position: relative;
-}
-
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+<link rel="stylesheet" href="normal.css">
 </head>
-<body marginwidth="0" marginheight:"0" >
-  <h1>breitkreutzer</h1>
-  <hr>
+<body>
+  <div class="header">
+    <h1>- breitkreutzer -</h1>
+  </div>
+
+  <div class="menu">
+    <ul>
 <?php
 if ($handle = opendir ( 'projects' )) {
-        while ( false !== ($file = readdir ( $handle )) ) {
-                if ($file != "." && $file != "..") {
-                        echo '<a href="projects/' . $file . '" class="linkbar" ><span>' . $file . 'alksdflaksdljf  <img src="http://www.marions-kochbuch.de/index-bilder/knoblauch-fleisch-wurst.jpg" width=100 /></span></a>';
-                }
-        }
-        closedir ( $handle );
-}     
+	while ( false !== ($folder = readdir ( $handle )) ) {
+		if ($folder != "." && $folder != "..") {
+			echo '<li>';
+			echo '<a href="projects/'.$folder. '" class="linkbar" >';
+            echo '<img src="projects/'.$folder.'/icon.svg" width=100 />';
+	            echo $folder ;
+            echo '</a>';
+            echo '</li>';
+		}
+	}
+	closedir ( $handle );
+}
 
 ?>
-     
+    </ul>
+  </div>
 </body>
-</html>i  
+</html>
