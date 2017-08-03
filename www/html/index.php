@@ -11,24 +11,25 @@
   </div>
 
   <div class="menu">
-    <ul>
+    
 <?php
 if ($handle = opendir ( 'projects' )) {
 	while ( false !== ($folder = readdir ( $handle )) ) {
 		if ($folder != "." && $folder != "..") {
-			echo '<li>';
-			echo '<a href="projects/'.$folder. '" class="linkbar" >';
-            echo '<img src="projects/'.$folder.'/icon.svg" width=100 />';
-	            echo $folder ;
-            echo '</a>';
-            echo '</li>';
+			echo '<div>';
+			echo '  <a class="outer" href="projects/'.$folder. '"  >';
+			echo '    <div class="inner">';
+            echo '      <img  src="projects/'.$folder.'/icon.svg" height="99%"/>';
+	        echo $folder ;
+	        echo '    </div>';
+            echo '  </a>';
+            echo '</div>';
 		}
 	}
 	closedir ( $handle );
 }
 
 ?>
-    </ul>
   </div>
 </body>
 </html>
