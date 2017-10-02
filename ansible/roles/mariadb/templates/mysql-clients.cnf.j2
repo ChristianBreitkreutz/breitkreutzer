@@ -10,9 +10,9 @@
 # The MariaDB server
 [mysqld]
 # Directory where you want to put your data
-data=/usr/local/mysql/var
+#data=/usr/local/mysql/data
 # Directory for the errmsg.sys file in the language you want to use
-language=/usr/local/share/mysql/english
+language=english
 # Create a file where the InnoDB/XtraDB engine stores it's data
 loose-innodb_data_file_path = ibdata1:1000M
 loose-innodb_file_per_table
@@ -22,4 +22,3 @@ log-basename=mysqld
 
 # Enable logging by default to help find problems
 general-log
-log-slow-queries

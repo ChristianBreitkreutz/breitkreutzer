@@ -1,7 +1,25 @@
 ---
 - include: installmariadb.yml
 
-- name: Add configuration
+- name: Creates /usr/local/mysql directory
+  become: true
+  file:
+    state: directory
+    owner: mysql
+    path: /usr/local/mysql
+    mode: 0755
+
+- name: remove some funny files (uurgs is this dirty)
+  become: true
+  file:
+    state: absent
+    path: "/var/lib/mysql/{{ item }}"
+  with_items:
+     - ib_logfile0
+     - ib_logfile1
+     - ibdata1
+
+- name: Add configuration /etc/my.cnf.d/mysql-clients.cnf
   become: true
   template:
     src: mysql-clients.cnf.j2
