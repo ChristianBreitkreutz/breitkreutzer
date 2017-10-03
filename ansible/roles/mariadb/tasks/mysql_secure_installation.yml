@@ -3,17 +3,17 @@
 # UPDATE mysql.user SET Password=PASSWORD('mysecret') WHERE User='root';
 # FLUSH PRIVILEGES;
 
-- name: Set root Password
-  become: true
-  mysql_user:
-    name: root
-    host: "{{ item }}"
-    password: "{{ mysql_root_password }}"
-    state: present
-  with_items:
-    - localhost # here is the bug somewhere
-    - 127.0.0.1
-    - ::1
+#- name: Set root Password
+#  become: true
+#  mysql_user:
+#    name: root
+##    host: "{{ item }}"
+#    password: "{{ mysql_root_password }}"
+#    state: present
+##  with_items:
+##    - localhost
+##    - 127.0.0.1
+##    - ::1
 
 - name: Reload privilege tables
   become: true
@@ -22,45 +22,88 @@
     - FLUSH PRIVILEGES
   changed_when: False
 
-- name: Reload privilege tables
-  command: 'mysql -ne "{{ item }}"'
-  with_items:
-    - FLUSH PRIVILEGES
-  changed_when: False
-
-- name: Add .my.cnf
-  template:
-    src: my.cnf.j2
-    dest: /root/.my.cnf
-    owner: root
-    group: root
-    mode: 0600
-
-- name: Remove anonymous users
-  become: true
-  command: 'mysql -ne "{{ item }}"'
-  with_items:
-    - DELETE FROM mysql.user WHERE User=''
-  changed_when: False
-
-- name: Disallow root login remotely
-  become: true
-  command: 'mysql -ne "{{ item }}"'
-  with_items:
-    - DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')
-  changed_when: False
-
-- name: Remove test database and access to it
-  become: true
-  command: 'mysql -ne "{{ item }}"'
-  with_items:
-    - DROP DATABASE test
-    - DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'
-  changed_when: False
-  ignore_errors: True
-
-- name: Reload privilege tables
-  command: 'mysql -ne "{{ item }}"'
-  with_items:
-    - FLUSH PRIVILEGES
-  changed_when: False
+#
+#- name: Add .my.cnf
+#  template:
+#    src: my.cnf.j2
+#    dest: /root/.my.cnf
+#    owner: root
+#    group: root
+#    mode: 0600
+#
+#- name: Remove anonymous users
+#  become: true
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - DELETE FROM mysql.user WHERE User=''
+#  changed_when: False
+#
+#- name: Disallow root login remotely
+#  become: true
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')
+#  changed_when: False
+#
+#- name: Remove test database and access to it
+#  become: true
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - DROP DATABASE test
+#    - DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'
+#  changed_when: False
+#  ignore_errors: True
+#rivilege tables
+#  become: true
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - FLUSH PRIVILEGES
+#  changed_when: False
+#
+#- name: Reload privilege tables
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - FLUSH PRIVILEGES
+#  changed_when: False
+#
+#- name: Add .my.cnf
+#  template:
+#    src: my.cnf.j2
+#    dest: /root/.my.cnf
+#    owner: root
+#    group: root
+#    mode: 0600
+#
+#- name: Remove anonymous users
+#  become: true
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - DELETE FROM mysql.user WHERE User=''
+#  changed_when: False
+#
+#- name: Disallow root login remotely
+#  become: true
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1')
+#  changed_when: False
+#
+#- name: Remove test database and access to it
+#  become: true
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - DROP DATABASE test
+#    - DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'
+#  changed_when: False
+#  ignore_errors: True
+#
+#- name: Reload privilege tables
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - FLUSH PRIVILEGES
+#  chang
+#- name: Reload privilege tables
+#  command: 'mysql -ne "{{ item }}"'
+#  with_items:
+#    - FLUSH PRIVILEGES
+#  changed_when: False

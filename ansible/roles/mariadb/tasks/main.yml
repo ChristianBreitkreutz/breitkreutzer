@@ -1,4 +1,6 @@
 ---
+# delete all mysql :
+# yum remove MariaDB-server MariaDB-client; rm -r /etc/rc*/*mysql* rm -rf /var/lib/mysql/;rm -rf /etc/my.cnf.d/
 - include: installmariadb.yml
 
 - name: Creates /usr/local/mysql directory
