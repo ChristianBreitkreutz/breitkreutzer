@@ -47,10 +47,12 @@ body{
   margin-left: 0;
 
   padding: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
   font-family: 'Abel';
   font-size: 35;
   background-color: rgba(25, 25, 25, 0.4);
-  color: #ffffff;
+  color: #fafafa;
 }
 .my-image{
   background-color: white;
@@ -58,7 +60,12 @@ body{
   background-position: center;
   background-size: cover;
 }
-
+.my-svg{
+  
+  background-repeat: no-repeat;
+  background-position: center;
+  background-height: 100%;
+}
 a{
     display: block;
     font-family: 'Abel';
