@@ -24,6 +24,9 @@ body{
   white-space: nowrap;
   overflow:hidden;
 }
+.big-text{
+  font-size: 30;
+}
 .base{
   height: 150pt;
   display: flex;
@@ -61,7 +64,6 @@ body{
   background-size: cover;
 }
 .my-svg{
-  
   background-repeat: no-repeat;
   background-position: center;
   background-height: 100%;
@@ -72,4 +74,7 @@ a{
     font-size: 25;
     color: #FFFFFF;
     text-decoration: none;
+}
+*:focus {
+    outline: none;
 }
