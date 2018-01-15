@@ -62,11 +62,13 @@ body{
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
+  padding-left: 0px;
 }
 .my-svg{
   background-repeat: no-repeat;
   background-position: center;
   background-height: 100%;
+  padding-left: 0px;
 }
 a{
     display: block;

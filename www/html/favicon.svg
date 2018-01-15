@@ -41,7 +41,7 @@
      units="px"
      inkscape:window-width="1861"
      inkscape:window-height="1056"
-     inkscape:window-x="59"
+     inkscape:window-x="3899"
      inkscape:window-y="24"
      inkscape:window-maximized="1" />
   <metadata
@@ -52,7 +52,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -72,15 +72,19 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:21.37870979px;line-height:125%;font-family:sans-serif;text-align:start;letter-spacing:0px;word-spacing:-2.7792325px;writing-mode:lr-tb;text-anchor:start;fill:#666666;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="204.30153"
-       y="270.96698"
+       x="203.38048"
+       y="270.86102"
        id="text4137"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4139"
-         x="204.30153"
-         y="270.96698"
+         x="203.38048"
+         y="270.86102"
          dx="-5.4444427"
-         style="letter-spacing:-3.14979672px;word-spacing:-2.7792325px;fill:#666666">Br</tspan></text>
+         style="letter-spacing:-3.14979672px;word-spacing:-2.7792325px;fill:#666666"
+         dy="0 0 -2.3599997">B<tspan
+   style="font-size:11.25px"
+   id="tspan4206"
+   dy="2.3599997">z</tspan>er</tspan></text>
   </g>
 </svg>
